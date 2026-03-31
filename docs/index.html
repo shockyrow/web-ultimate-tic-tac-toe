@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tic-Tac-Toe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fafafa;
+            background: #101010;
+            height: 100vh;
+        }
+
+        main {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .btn {
+            background: #242424;
+            color: white;
+            border: 1px solid #323232;
+            padding: 16px 24px;
+            border-radius: 4px;
+        }
+
+        .main-grid, .grid {
+            padding: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .main-grid {
+            gap: 8px;
+        }
+
+        .grid {
+            border-radius: 8px;
+            background: #242424;
+            gap: 4px;
+            position: relative;
+        }
+
+        .crossed::before {
+            content: '❌';
+        }
+
+        .circled::before {
+            content: '⭕';
+        }
+
+        .crossed::before,
+        .circled::before {
+            border-radius: 8px;
+            background: #242424;
+            opacity: .64;
+            position: absolute;
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .grid button {
+            width: 32px;
+            aspect-ratio: 1;
+            background: #323232;
+            border: 1px solid #484848;
+            border-radius: 4px;
+            font-family: 'monospace';
+            color: slateblue;
+        }
+
+        .grid button[disabled] {
+            background: none;
+            border: none;
+        }
+
+        .hud {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="main-grid">
+        <div class="grid">
+            <button onclick="play(this, 1)"></button>
+            <button onclick="play(this, 2)"></button>
+            <button onclick="play(this, 3)"></button>
+            <button onclick="play(this, 4)"></button>
+            <button onclick="play(this, 5)"></button>
+            <button onclick="play(this, 6)"></button>
+            <button onclick="play(this, 7)"></button>
+            <button onclick="play(this, 8)"></button>
+            <button onclick="play(this, 9)"></button>
+        </div>
+        <div class="grid">
+            <button onclick="play(this, 1)"></button>
+            <button onclick="play(this, 2)"></button>
+            <button onclick="play(this, 3)"></button>
+            <button onclick="play(this, 4)"></button>
+            <button onclick="play(this, 5)"></button>
+            <button onclick="play(this, 6)"></button>
+            <button onclick="play(this, 7)"></button>
+            <button onclick="play(this, 8)"></button>
+            <button onclick="play(this, 9)"></button>
+        </div>
+        <div class="grid">
+            <button onclick="play(this, 1)"></button>
+            <button onclick="play(this, 2)"></button>
+            <button onclick="play(this, 3)"></button>
+            <button onclick="play(this, 4)"></button>
+            <button onclick="play(this, 5)"></button>
+            <button onclick="play(this, 6)"></button>
+            <button onclick="play(this, 7)"></button>
+            <button onclick="play(this, 8)"></button>
+            <button onclick="play(this, 9)"></button>
+        </div>
+        <div class="grid">
+            <button onclick="play(this, 1)"></button>
+            <button onclick="play(this, 2)"></button>
+            <button onclick="play(this, 3)"></button>
+            <button onclick="play(this, 4)"></button>
+            <button onclick="play(this, 5)"></button>
+            <button onclick="play(this, 6)"></button>
+            <button onclick="play(this, 7)"></button>
+            <button onclick="play(this, 8)"></button>
+            <button onclick="play(this, 9)"></button>
+        </div>
+        <div class="grid">
+            <button onclick="play(this, 1)"></button>
+            <button onclick="play(this, 2)"></button>
+            <button onclick="play(this, 3)"></button>
+            <button onclick="play(this, 4)"></button>
+            <button onclick="play(this, 5)"></button>
+            <button onclick="play(this, 6)"></button>
+            <button onclick="play(this, 7)"></button>
+            <button onclick="play(this, 8)"></button>
+            <button onclick="play(this, 9)"></button>
+        </div>
+        <div class="grid">
+            <button onclick="play(this, 1)"></button>
+            <button onclick="play(this, 2)"></button>
+            <button onclick="play(this, 3)"></button>
+            <button onclick="play(this, 4)"></button>
+            <button onclick="play(this, 5)"></button>
+            <button onclick="play(this, 6)"></button>
+            <button onclick="play(this, 7)"></button>
+            <button onclick="play(this, 8)"></button>
+            <button onclick="play(this, 9)"></button>
+        </div>
+        <div class="grid">
+            <button onclick="play(this, 1)"></button>
+            <button onclick="play(this, 2)"></button>
+            <button onclick="play(this, 3)"></button>
+            <button onclick="play(this, 4)"></button>
+            <button onclick="play(this, 5)"></button>
+            <button onclick="play(this, 6)"></button>
+            <button onclick="play(this, 7)"></button>
+            <button onclick="play(this, 8)"></button>
+            <button onclick="play(this, 9)"></button>
+        </div>
+        <div class="grid">
+            <button onclick="play(this, 1)"></button>
+            <button onclick="play(this, 2)"></button>
+            <button onclick="play(this, 3)"></button>
+            <button onclick="play(this, 4)"></button>
+            <button onclick="play(this, 5)"></button>
+            <button onclick="play(this, 6)"></button>
+            <button onclick="play(this, 7)"></button>
+            <button onclick="play(this, 8)"></button>
+            <button onclick="play(this, 9)"></button>
+        </div>
+        <div class="grid">
+            <button onclick="play(this, 1)"></button>
+            <button onclick="play(this, 2)"></button>
+            <button onclick="play(this, 3)"></button>
+            <button onclick="play(this, 4)"></button>
+            <button onclick="play(this, 5)"></button>
+            <button onclick="play(this, 6)"></button>
+            <button onclick="play(this, 7)"></button>
+            <button onclick="play(this, 8)"></button>
+            <button onclick="play(this, 9)"></button>
+        </div>
+    </div>
+
+    <div class="hud">
+        <div class="info">
+            <p id="message">Test</p>
+        </div>
+        <div class="actions">
+            <button class="btn" onclick="newGame()">New Game</button>
+        </div>
+    </div>
+</main>
+
+<script>
+  const CROSS = '❌';
+  const CIRCLE = '⭕';
+  const EMPTY = '';
+
+  let winners = [];
+  let gameOver = false;
+  let isCrossTurn = true;
+
+  function newGame() {
+    document.querySelectorAll('.grid::before').forEach(grid => {
+      btn.style.display = 'none';
+    });
+    document.querySelectorAll('.grid>button').forEach(btn => {
+      btn.disabled = false;
+      btn.innerText = EMPTY;
+      btn.classList.add('empty');
+    });
+    winners = [];
+    gameOver = false;
+    isCrossTurn = true;
+
+    for (let i = 0; i < 9; i++) {
+      winners.push(EMPTY);
+    }
+
+    showTurnMessage();
+  }
+
+  function checkGrid(index) {
+    const buttons = document.querySelectorAll(`.grid:nth-child(${index})>button`).values();
+    const cells = buttons.map(btn => btn.innerText).toArray();
+    const winner = getWinner(cells);
+
+    if (winner !== null) {
+      document.querySelector(`.grid:nth-child(${index})`).classList.add('ended', winner === CROSS ? 'crossed' : 'circled');
+      winners[index - 1] = winner;
+    }
+  }
+
+  function checkGameOver() {
+    const winner = getWinner(winners);
+
+    if (winner === null) {
+      return;
+    }
+
+    gameOver = true;
+    showMessage((winner === CROSS ? 'Cross' : 'Circle') + ' won!');
+  }
+
+  function getWinner(cells) {
+    const variants = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    for (const variant of variants) {
+      const expected = cells[variant[0]];
+
+      if (expected === EMPTY) continue;
+
+      const won = variant.reduce((matching, index) => matching & (cells[index] === expected), true);
+
+      if (won) {
+        return expected;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * @param {HTMLElement} button
+   */
+  function play(button, index) {
+    button.innerText = isCrossTurn ? CROSS : CIRCLE;
+    button.disabled = true;
+    button.classList.remove('empty');
+    isCrossTurn ^= true;
+
+    for (let i = 1; i <= 8; i++) {
+      checkGrid(i);
+    }
+
+    disableAllBoards();
+    checkGameOver();
+
+    if (gameOver) {
+      return;
+    }
+
+    showTurnMessage();
+
+    if (winners[index - 1] !== EMPTY) {
+      activateAllBoards();
+      return;
+    }
+
+    activateBoard(index);
+  }
+
+  function disableAllBoards() {
+    document.querySelectorAll('.grid>button').forEach(btn => btn.disabled = true);
+  }
+
+  function activateBoard(index) {
+    document.querySelectorAll(`.grid:nth-child(${index})>button.empty`).forEach(btn => btn.disabled = false);
+  }
+
+  function activateAllBoards() {
+    document.querySelectorAll('.grid:not(.ended)>button.empty').forEach(btn => btn.disabled = false);
+  }
+
+  function showTurnMessage() {
+    showMessage('Turn: ' + (isCrossTurn ? 'Cross' : 'Circle'));
+  }
+
+  function showMessage(message) {
+    document.getElementById('message').innerText = message;
+  }
+
+  newGame();
+</script>
+</body>
+</html>
