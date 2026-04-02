@@ -223,8 +223,8 @@
   let isCrossTurn = true;
 
   function newGame() {
-    document.querySelectorAll('.grid::before').forEach(grid => {
-      btn.style.display = 'none';
+    document.querySelectorAll('.grid').forEach(grid => {
+      grid.classList.remove('crossed', 'circled');
     });
     document.querySelectorAll('.grid>button').forEach(btn => {
       btn.disabled = false;
@@ -300,7 +300,7 @@
     button.classList.remove('empty');
     isCrossTurn ^= true;
 
-    for (let i = 1; i <= 8; i++) {
+    for (let i = 1; i <= 9; i++) {
       checkGrid(i);
     }
 
